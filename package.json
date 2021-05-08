@@ -4,7 +4,9 @@
   "description": "Starfiles but For Desktop",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "compile": "electron-builder --win"
   },
   "author": "CrafterPika",
   "license": "ISC",
@@ -12,6 +14,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "electron": "^12.0.7"
+    "electron": "^12.0.7",
+    "electron-builder": "^22.9.1"
   }
 }

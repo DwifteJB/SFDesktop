@@ -1,0 +1,36 @@
+name: "Developer Build (x64)"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  Windows:
+    runs-on: windows-latest
+    continue-on-error: true
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: "Install Electron Builder"
+      run: npm install electron-builder -g
+    - name: "Install Dependincies"
+      run: npm install
+    - name: "Install Electron"
+      run: npm i --save-dev electron
+    - name: "Build for Windows"
+      run: electron-builder --win
+    - name: "Upload Windows Build"
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Starfiles-Dev Win-X64"
+        path: "dist/starfiles-desktop Setup 0.0.1.exe"
