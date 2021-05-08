@@ -44,5 +44,12 @@ contextBridge.exposeInMainWorld('nodeApi', {
     },
     openUserPath(data) {
         require('child_process').exec(`start "" "${data}"`);
+    },
+    addKey(data) {
+        const new_conf_json = {
+            userData: dataPath,
+            key: data
+        }
+        fs.writeFileSync(dataPath + "/config.json", JSON.stringify(new_conf_json, null, 4));
     }
 });

@@ -37,8 +37,8 @@ crtCSPHeader()
 $('head').append(`<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@200&display=swap">`)
 $('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
 
-async function addOpenDir() {
+async function addScripts() {
     userConfig = await fetch(window.nodeApi.gibConfigPath()).then(response => response.json())
-    $('body').append(`<button id="btn1">Open User Dir</button>`)
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn1").addEventListener('click', openDir);\nfunction openDir() { window.nodeApi.openUserPath("${userConfig.userData}") }</script>`)
-}addOpenDir();
+    $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn2").addEventListener('click', regKey);\nfunction regKey() {\nvar input =  document.getElementById("private_key").value;\nconsole.log(input);\nwindow.nodeApi.addKey(input);\n};</script>`)
+}addScripts();
