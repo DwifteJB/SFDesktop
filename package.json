@@ -1,0 +1,15 @@
+{
+  "name": "starfiles-desktop",
+  "version": "0.0.1",
+  "description": "Starfiles but For Desktop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CrafterPika",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^12.0.7",
+    "uuid": "^8.3.2"
+  }
+}
