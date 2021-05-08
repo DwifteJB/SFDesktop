@@ -41,4 +41,6 @@ async function addScripts() {
     userConfig = await fetch(window.nodeApi.gibConfigPath()).then(response => response.json())
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn1").addEventListener('click', openDir);\nfunction openDir() { window.nodeApi.openUserPath("${userConfig.userData}") }</script>`)
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn2").addEventListener('click', regKey);\nfunction regKey() {\nvar input =  document.getElementById("private_key").value;\nconsole.log(input);\nwindow.nodeApi.addKey(input);\n};</script>`)
+    // print starfiles key
+    $('div').append(`<br><br><p>You Starfiles key is: <code>${userConfig.key}</code></p>`)
 }addScripts();
