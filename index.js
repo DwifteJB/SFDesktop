@@ -1,4 +1,4 @@
-const { app, BrowserWindow, globalShortcut} = require('electron')
+const { app, BrowserWindow, globalShortcut, ipcRenderer} = require('electron')
 const path = require('path')
 
 let mainWindow;
@@ -10,7 +10,8 @@ function createWindow () {
       icon: path.join(__dirname, 'starfiles.png'),
       webPreferences: {
         preload: path.join(__dirname, 'src/js/preload.js'),
-        nodeIntegration: true,
+        nodeIntegration: false,
+        enableRemoteModule: false
       }
     })
     mainWindow.setMenuBarVisibility(false)

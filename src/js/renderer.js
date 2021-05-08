@@ -3,7 +3,7 @@ const random = (length = 8) => {
 };
 const secure_nonce = random(14)
 
-async function bruh() {
+async function crtCSPHeader() {
     // get csp config
     const csp_conf = await fetch("./csp.json").then(response => response.json())
     
@@ -23,11 +23,14 @@ async function bruh() {
     const img_url = csp_conf.img_src;
     const img_src_conf = img_url.join(' ');
 
-    const csp_header = `<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf};">`;
+    // Creat CSP Header
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+    const csp_header = `<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->\n<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf};">`;
+    const csp_header2 = `<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf};">`;
     $('head').append(csp_header);
-}
-bruh();
+    $('head').append(csp_header2);
+}crtCSPHeader();
 
 // Add Urls
 $('head').append(`<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@200&display=swap">`)
-$('body').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
+$('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
