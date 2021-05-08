@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "Starfiles Linux-x64"
-        path: "dist/starfiles-desktop_1.0.0_amd64.snap"
+        path: "dist/starfiles-desktop_0.0.1_amd64.snap"
 
   MacOS:
 
@@ -63,7 +63,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "Starfiles OSX-x64"
-        path: "dist/starfiles-desktop-1.0.0.dmg"
+        path: "dist/starfiles-desktop-0.0.1.dmg"
 
   Windows:
     runs-on: windows-latest
@@ -90,4 +90,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "Starfiles-Dev Win-X64"
-        path: "dist/starfiles-desktop Setup 1.0.0.exe"
+        path: "dist/starfiles-desktop Setup 0.0.1.exe"
