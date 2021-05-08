@@ -11,10 +11,10 @@ async function loadFilesList() {
     files.forEach(data => {
         // console.log(element.name)
         // Show them in index.html
-        $('#filesList').append(`<a href="https://starfiles.co/file/${data.id}">${data.name}</a><br>`)
+        $('#filesList').append(`<a href="https://starfiles.co/file/${data.id}">${data.name}</a>`)
     });
     folders.forEach(data => {
         // Show them in index.html
-        $('#folderList').append(`<a href="https://starfiles.co/folder/${data.id}">${data.name}</a><br>`)
+        $('#folderList').append(`<a href="https://starfiles.co/folder/${data.id}">${data.name}</a>`)
     })
 }loadFilesList();

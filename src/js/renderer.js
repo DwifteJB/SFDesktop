@@ -36,10 +36,10 @@ async function crtCSPHeader() {
 }
 crtCSPHeader()
 
-
-// Other Head configs
-$('head').append(`<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@200&display=swap">`)
+//Other Head Configs
+$('head').append('<link rel="stylesheet" href="./css/main.css">')
 $('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
+
 
 async function addScripts() {
     userConfig = await fetch(window.nodeApi.gibConfigPath()).then(response => response.json())
