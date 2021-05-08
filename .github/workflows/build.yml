@@ -7,63 +7,6 @@ on:
     branches: [ main ]
 
 jobs:
-  Ubuntu:
-
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x 
-    - name: "Install Electron Builder"
-      run: npm install electron-builder -g
-    - name: "Install Dependencies"
-      run: npm i
-    - name: "Install Electron"
-      run: npm i electron --save-dev
-    - name: "Build Linux"
-      run: electron-builder --linux snap
-    - name: "Upload Linux"
-      uses: actions/upload-artifact@v2
-      with:
-        name: "Starfiles Linux-x64"
-        path: "dist/starfiles-desktop_0.0.1_amd64.snap"
-
-  MacOS:
-
-    runs-on: macos-latest
-    continue-on-error: true
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-
-    - name: "Install Electron Builder"
-      run: npm install electron-builder -g
-    - name: "Install Dependencies"
-      run: npm i
-    - name: "Install Electron"
-      run: npm i electron --save-dev
-
-    - name: "Build macos"
-      run: electron-builder --mac
-
-    - name: "Upload OSX"
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: "Starfiles OSX-x64"
-        path: "dist/starfiles-desktop-0.0.1.dmg"
 
   Windows:
     runs-on: windows-latest
