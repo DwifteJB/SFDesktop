@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require("path");
+const { contextBridge, ipcRenderer } = require('electron')
 
+// The User Data
 let dataPath = "";
 
 if (process.platform === "win32") {
@@ -22,8 +24,25 @@ if (!fs.existsSync(path.join(dataPath, "themes"))) {
     fs.mkdirSync(path.join(dataPath, "themes"));
 }
 
+const regex = /\\/g;
+dataPath = dataPath.replace(regex, '/');
+
 const conf_json = {
     userData: dataPath,
     key: '',
 }
-fs.writeFileSync(dataPath + "/config.json", JSON.stringify(conf_json, null, 4));
+
+if (!fs.existsSync(path.join(dataPath, "config.json"))) {
+    fs.writeFileSync(dataPath + "/config.json", JSON.stringify(conf_json, null, 4));
+}
+
+// Doing A ContextBrige
+contextBridge.exposeInMainWorld('nodeApi', {
+    gibConfigPath: () => {
+        const configPath = path.join(dataPath, 'config.json')
+        return `file://${configPath}`;
+    },
+    openUserPath(data) {
+        require('child_process').exec(`start "" "${data}"`);
+    }
+});

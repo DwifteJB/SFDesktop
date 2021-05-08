@@ -25,12 +25,18 @@ async function crtCSPHeader() {
 
     // Creat CSP Header
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-    const csp_header = `<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->\n<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf};">`;
-    const csp_header2 = `<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf};">`;
+    const csp_header = `<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->\n<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'strict-dynamic' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf};">`;
+    const csp_header2 = `<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'strict-dynamic' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf};">`;
     $('head').append(csp_header);
     $('head').append(csp_header2);
 }crtCSPHeader();
 
-// Add Urls
+// Other Head configs
 $('head').append(`<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@200&display=swap">`)
 $('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
+
+async function addOpenDir() {
+    const userConfig = await fetch(window.nodeApi.gibConfigPath()).then(response => response.json())
+    $('body').append(`<button id="btn1">Open User Dir</button>`)
+    $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn1").addEventListener('click', openDir);\nfunction openDir() { window.nodeApi.openUserPath("${userConfig.userData}") }</script>`)
+}addOpenDir();

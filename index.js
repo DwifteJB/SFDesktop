@@ -1,4 +1,4 @@
-const { app, BrowserWindow, globalShortcut, ipcRenderer} = require('electron')
+const { app, BrowserWindow, globalShortcut} = require('electron')
 const path = require('path')
 
 let mainWindow;
@@ -10,8 +10,9 @@ function createWindow () {
       icon: path.join(__dirname, 'starfiles.png'),
       webPreferences: {
         preload: path.join(__dirname, 'src/js/preload.js'),
+        contextIsolation: true,
         nodeIntegration: false,
-        enableRemoteModule: false
+        enableRemoteModule: false,
       }
     })
     mainWindow.setMenuBarVisibility(false)
@@ -27,11 +28,11 @@ app.whenReady().then(() => {
     })
     globalShortcut.register('Alt+Shift+C', () => {
         mainWindow.webContents.openDevTools()
-        console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');
+        // console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');
     })
     globalShortcut.register('Alt+Cmd+C', () => {
         mainWindow.webContents.openDevTools()
-        console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');
+        // console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');
     })
   })
 
