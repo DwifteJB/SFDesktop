@@ -18,5 +18,13 @@
         "https://*.gitlab.io",
         "https://cdn.starfiles.co/",
         "https://cdn.starfiles.ml/"
+    ],
+    "connect_src": [
+        "https://api.starfiles.co/",
+        "https://api.starfiles.ml/",
+        "https://cdn.starfiles.co/",
+        "https://cdn.starfiles.ml/",
+        "https://starfiles.co/",
+        "https://starfiles.ml/"
     ]
 }
