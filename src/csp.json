@@ -1,0 +1,22 @@
+{
+    "script_src": [
+        "https://code.jquery.com/",
+        "https://crafterpika.ml/"
+    ],
+    "style_src": [
+        "https://*.github.io/",
+        "https://*.gitlab.io",
+        "https://fonts.googleapis.com/",
+        "https://cdn.starfiles.co/",
+        "https://cdn.starfiles.ml/"
+    ],
+    "font_src": [
+        "https://fonts.gstatic.com/"
+    ],
+    "img_src": [
+        "https://*.github.io/",
+        "https://*.gitlab.io",
+        "https://cdn.starfiles.co/",
+        "https://cdn.starfiles.ml/"
+    ]
+}
