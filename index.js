@@ -41,7 +41,7 @@ ipcMain.on('load-desktop', (event,arg) => {
     newWin.loadFile(path.join(__dirname, 'src/index.html'))
   }
   ipcMain.on("maximize", () => {
-    window.isMaximized() ? window.unmaximize() : window.maximize();
+    newWin.isMaximized() ? newWin.unmaximize() : newWin.maximize();
   })
   ipcMain.on("close", () => {
     newWin.close();
@@ -56,12 +56,6 @@ ipcMain.on('load-desktop', (event,arg) => {
     app.on('activate', function () {
       if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
-    globalShortcut.register('Alt+Shift+C', () => {
-        mainWindow.webContents.openDevTools()
-    })
-    globalShortcut.register('Alt+Cmd+C', () => {
-        mainWindow.webContents.openDevTools()
-    })
   })
   app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
@@ -71,12 +65,6 @@ app.whenReady().then(() => {
     createWindow();
     app.on('activate', function () {
       if (BrowserWindow.getAllWindows().length === 0) createWindow()
-    })
-    globalShortcut.register('Alt+Shift+C', () => {
-        mainWindow.webContents.openDevTools()
-    })
-    globalShortcut.register('Alt+Cmd+C', () => {
-        mainWindow.webContents.openDevTools()
     })
   })
 
