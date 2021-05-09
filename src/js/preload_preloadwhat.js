@@ -61,6 +61,10 @@ contextBridge.exposeInMainWorld('nodeApi', {
                 //firsttime.html
             }
             const userdata = await fetch("https://api.starfiles.co/2.0/users/get_details.php?profile=" + LocalUserData.key).then(response => response.json());
+            const folders = await fetch(`https://api.starfiles.co/user/folders?profile=${LocalUserData.key}`).then(response => response.json());
+            const files = await fetch(`https://api.starfiles.co/user/files?profile=${LocalUserData.key}`).then(response => response.json());
+            LocalUserData.folders = folders.length;
+            LocalUserData.files = files.length;
             LocalUserData.username = userdata["username"];
             if (userdata["avatar"].length < 1) { 
                 LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png"

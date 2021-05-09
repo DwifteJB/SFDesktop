@@ -47,11 +47,11 @@ let userConfig = "";
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn1").addEventListener('click', openDir);\nfunction openDir() { window.nodeApi.openUserPath("${userConfig.userData}") }</script>`)
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn2").addEventListener('click', regKey);\nfunction regKey() {\nvar input =  document.getElementById("private_key").value;\nconsole.log(input);\nwindow.nodeApi.addKey(input);\n};</script>`)
     // print starfiles key
-    $('#info').append(`<br><br><p>You Starfiles key is: <code>${userConfig.key}</code></p>`)
+    // $('#info').append(`<br><br><p>You Starfiles key is: <code>${userConfig.key}</code></p>`)
     $("#username").text(userConfig.username)
     $("#avatar").attr("src", userConfig.avatar)
-    $("#files").text("Files: " + await window.nodeApi.getFilesAmount())
-    $("#folders").text("Folders: " + await window.nodeApi.getFoldersAmount())
+    $("#files").text("Files: " + userConfig.files)
+    $("#folders").text("Folders: " + userConfig.folders)
 
     //for(index in json) {console.log(`${[index]} : ${json[index]}`)}
 
@@ -67,5 +67,5 @@ $("#close").click(function() {
     window.nodeApi.sendEvent("close")
 });
 $(".userInfo").click(function() {
-    alert("open settings xd");
+    window.open("./settings.html", "_blank")
 })
