@@ -11,8 +11,8 @@ on:
         description: 'Test scenario tags' 
   push:
     branches: [ main ]
-  #pull_request:
-    #branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
 
@@ -27,6 +27,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
+    - name: "Check Commit message for --build"
+      if: endsWith(github.event.head_commit.message, '--build')
+
 
     - name: "Install Electron Builder"
       run: npm install electron-builder -g
