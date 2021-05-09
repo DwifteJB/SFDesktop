@@ -37,10 +37,7 @@ ipcMain.on('load-desktop', (event,arg) => {
         enableRemoteModule: false,
       }
     })
-
     newWin.setMenuBarVisibility(false)
-
-
     newWin.loadFile(path.join(__dirname, 'src/index.html'))
   }
   ipcMain.on("maximize", () => {
@@ -61,35 +58,28 @@ ipcMain.on('load-desktop', (event,arg) => {
     })
     globalShortcut.register('Alt+Shift+C', () => {
         mainWindow.webContents.openDevTools()
-        // console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');
     })
     globalShortcut.register('Alt+Cmd+C', () => {
         mainWindow.webContents.openDevTools()
-        // console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');
     })
   })
-
   app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
 })
-}) 
+})
 app.whenReady().then(() => {
-    createWindow()
-    
+    createWindow();
     app.on('activate', function () {
       if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
     globalShortcut.register('Alt+Shift+C', () => {
         mainWindow.webContents.openDevTools()
-        // console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');
     })
     globalShortcut.register('Alt+Cmd+C', () => {
         mainWindow.webContents.openDevTools()
-        // console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');
     })
   })
 
   app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
 })
-
