@@ -87,6 +87,7 @@ contextBridge.exposeInMainWorld('nodeApi', {
                 LocalUserData.avatar = userData["avatar"]
             }
             fs.writeFileSync(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData))
+            fs.writeFileSync(path.join(dataPath, 'data.json'), JSON.stringify(dataJS))
             ipcRenderer.send("load-desktop");
             resolve(true)
 
