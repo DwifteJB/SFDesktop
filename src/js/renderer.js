@@ -5,8 +5,9 @@ const secure_nonce = random(14)
 
 let userConfig = "";
 
-async function crtCSPHeader() {
+(async (userConfig, secure_nonce) => {
     // get csp config
+    userConfig = await fetch(window.nodeApi.gibConfigPath()).then(response => response.json())
     const csp_conf = await fetch("./csp.json").then(response => response.json())
         
     // script-src
@@ -33,18 +34,19 @@ async function crtCSPHeader() {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
     $('head').append(`<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->\n<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'strict-dynamic' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf}; connect-src 'self' ${connect_src_conf};">`);
     $('head').append(`<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'strict-dynamic' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf}; connect-src 'self' ${connect_src_conf};">`);
-}
-crtCSPHeader()
-
-//Other Head Configs
-$('head').append('<link rel="stylesheet" href="./css/main.css">')
-$('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
+    //Other Head Configs
+    $('head').append('<link rel="stylesheet" href="./css/main.css">')
+    $('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
 
 
-async function addScripts() {
-    userConfig = await fetch(window.nodeApi.gibConfigPath()).then(response => response.json())
+
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn1").addEventListener('click', openDir);\nfunction openDir() { window.nodeApi.openUserPath("${userConfig.userData}") }</script>`)
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn2").addEventListener('click', regKey);\nfunction regKey() {\nvar input =  document.getElementById("private_key").value;\nconsole.log(input);\nwindow.nodeApi.addKey(input);\n};</script>`)
     // print starfiles key
     $('#info').append(`<br><br><p>You Starfiles key is: <code>${userConfig.key}</code></p>`)
-}addScripts();
+
+    if (!userConfig.key || userConfig.key.length == 0) {
+        $("body")
+    }
+
+})();
