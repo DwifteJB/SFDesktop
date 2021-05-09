@@ -56,20 +56,25 @@ contextBridge.exposeInMainWorld('nodeApi', {
     },
     preloadIndex() {
         return new Promise(async (resolve) => {
-            const LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
-            if (LocalUserData.length < 1) {
-                //firsttime.html
+            try {
+                const LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
+                if (LocalUserData.length < 1) {
+                    //firsttime.html
+                }
+                const userdata = await fetch("https://api.starfiles.co/2.0/users/get_details.php?profile=" + LocalUserData.key).then(response => response.json());
+                LocalUserData.username = userdata["username"];
+                if (userdata["avatar"].length < 1) { 
+                    LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png"
+                } else {
+                    LocalUserData.avatar = userdata["avatar"]
+                }
+                await fs.writeFileSync(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData))
+                ipcRenderer.send("load-desktop");
+                resolve(true)
+            } catch (err) {
+                ipcRenderer.send("load-desktop");
+                resolve(true)
             }
-            const userdata = await fetch("https://api.starfiles.co/2.0/users/get_details.php?profile=" + LocalUserData.key).then(response => response.json());
-            LocalUserData.username = userdata["username"];
-            if (userdata["avatar"].length < 1) { 
-                LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png"
-            } else {
-                LocalUserData.avatar = userdata["avatar"]
-            }
-            await fs.writeFileSync(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData))
-            ipcRenderer.send("load-desktop");
-            resolve(true)
         })
     }
 });
