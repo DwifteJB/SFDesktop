@@ -9,8 +9,8 @@ on:
         default: 'warning'
       tags:
         description: 'Test scenario tags' 
-  #push:
-    #branches: [ main ]
+  push:
+    branches: [ main ]
   #pull_request:
     #branches: [ main ]
 
