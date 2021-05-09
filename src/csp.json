@@ -17,7 +17,9 @@
         "https://*.github.io/",
         "https://*.gitlab.io",
         "https://cdn.starfiles.co/",
-        "https://cdn.starfiles.ml/"
+        "https://cdn.starfiles.ml/",
+        "https://gravatar.com/",
+        "https://cdn.discordapp.com/"
     ],
     "connect_src": [
         "https://api.starfiles.co/",
