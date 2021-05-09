@@ -35,7 +35,7 @@ let userConfig = "";
     $('head').append(`<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->\n<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'strict-dynamic' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf}; connect-src 'self' ${connect_src_conf};">`);
     $('head').append(`<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'strict-dynamic' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf}; connect-src 'self' ${connect_src_conf};">`);
     //Other Head Configs
-    $('head').append('<link rel="stylesheet" href="./css/main.css">')
+    $("head").append(`<link rel="stylesheet" href="./css/main.css">`)
     $('head').append('<link rel="stylesheet" href="./bootstrap/css/bootstrap-grid.min.css">')
     $('head').append('<link rel="stylesheet" href="./css/titlebar.css">')
     $('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
@@ -46,10 +46,13 @@ let userConfig = "";
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn2").addEventListener('click', regKey);\nfunction regKey() {\nvar input =  document.getElementById("private_key").value;\nconsole.log(input);\nwindow.nodeApi.addKey(input);\n};</script>`)
     // print starfiles key
     $('#info').append(`<br><br><p>You Starfiles key is: <code>${userConfig.key}</code></p>`)
+    $("#username").text(userConfig.username)
+    $("#avatar").attr("src", userConfig.avatar)
+    $("#files").text("Files: " + await window.nodeApi.getFilesAmount())
+    $("#folders").text("Folders: " + await window.nodeApi.getFoldersAmount())
 
-    //if (!userConfig.key || userConfig.key.length == 0) {
-      //  $("body") // UNUSED. THIS WOULD BE USED FOR FIRST-TIME, instead I moved it to another file. i would do it but I cba since I'm trying to run lego island
-    //}
+    //for(index in json) {console.log(`${[index]} : ${json[index]}`)}
+
 
 })();
 $("#minimize").click(function() {
@@ -61,3 +64,6 @@ $("#maximize").click(function() {
 $("#close").click(function() {
     window.nodeApi.sendEvent("close")
 });
+$(".userInfo").click(function() {
+    alert("open settings xd");
+})

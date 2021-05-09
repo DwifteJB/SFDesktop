@@ -54,5 +54,23 @@ contextBridge.exposeInMainWorld('nodeApi', {
     },
     sendEvent(eventName) {
         ipcRenderer.send(eventName);
+    },
+    async userInfo() {
+        const LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
+        return LocalUserData;
+        // console.log(results)
+        // resolve(results);
+    },
+    async getFilesAmount() {
+        const LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
+        const files = await fetch(`https://api.starfiles.co/user/files?profile=${LocalUserData.key}`).then(response => response.json())
+        console.log(files.length)
+        return files.length;
+    },
+    async getFoldersAmount() {
+        const LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
+        const files = await fetch(`https://api.starfiles.co/user/folders?profile=${LocalUserData.key}`).then(response => response.json())
+        console.log(files.length)
+        return files.length;
     }
 });

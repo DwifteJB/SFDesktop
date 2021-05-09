@@ -48,3 +48,48 @@ hr {
     border-color: #4f5654;
     background-color: #4f5654;
 }
+
+#files {
+    position:relative;
+    right:44px;
+    top: 5px;
+    font-size:15px;
+    font-family: 'Roboto Condensed', sans-serif;
+    user-select: none;
+}
+
+#folders {
+    position:relative;
+    right:86.5px;
+    top: 25px;
+    font-size:15px;
+    font-family: 'Roboto Condensed', sans-serif;
+    user-select: none;
+}
+#username {
+    position:relative;
+    left:5px;
+    bottom: 15px;
+    font-size:20px;
+    font-family: 'Roboto Condensed', sans-serif;
+    user-select:none;
+}
+
+#avatar {
+    position:relative;
+    bottom:0px;
+    height:50px;
+    width:50px;
+    user-select:none;
+}
+
+.userInfo {
+    position:fixed;
+    bottom:0px;
+    right:0px;
+    width:230px;
+    height:110px;
+    background-color:rgb(33,33,33);
+    color:white;
+    user-select:none;
+}
