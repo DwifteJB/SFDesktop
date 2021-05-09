@@ -1,17 +1,20 @@
 {
     "script_src": [
         "https://code.jquery.com/",
-        "https://crafterpika.ml/"
+        "https://crafterpika.ml/",
+        "https://cdn.jsdelivr.net"
     ],
     "style_src": [
         "https://*.github.io/",
         "https://*.gitlab.io",
         "https://fonts.googleapis.com/",
         "https://cdn.starfiles.co/",
-        "https://cdn.starfiles.ml/"
+        "https://cdn.starfiles.ml/",
+        "https://cdn.jsdelivr.net"
     ],
     "font_src": [
-        "https://fonts.gstatic.com/"
+        "https://fonts.gstatic.com/",
+        "https://cdn.jsdelivr.net"
     ],
     "img_src": [
         "https://*.github.io/",
@@ -29,6 +32,7 @@
         "https://starfiles.co/",
         "https://starfiles.ml/",
         "https://dwiftejb.github.io/",
-        "http://dwifte.me/"
+        "http://dwifte.me/",
+        "https://cdn.jsdelivr.net"
     ]
 }
