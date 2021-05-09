@@ -65,7 +65,7 @@ contextBridge.exposeInMainWorld('nodeApi', {
             if (userdata["avatar"].length < 1) { 
                 LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png"
             } else {
-                LocalUserData.avatar = userData["avatar"]
+                LocalUserData.avatar = userdata["avatar"]
             }
             await fs.writeFileSync(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData))
             ipcRenderer.send("load-desktop");
