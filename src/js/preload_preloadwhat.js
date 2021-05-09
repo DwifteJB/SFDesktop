@@ -86,10 +86,14 @@ contextBridge.exposeInMainWorld('nodeApi', {
             } else {
                 LocalUserData.avatar = userData["avatar"]
             }
-            fs.writeFileSync(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData))
-            fs.writeFileSync(path.join(dataPath, 'data.json'), JSON.stringify(dataJS))
-            ipcRenderer.send("load-desktop");
-            resolve(true)
+            fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
+                fs.writeFile(path.join(dataPath, 'data.json'), JSON.stringify(dataJS,null,4), function() {
+         
+                    ipcRenderer.send("load-desktop");
+                    resolve(true)
+                })
+            })
+
 
         })
     }
