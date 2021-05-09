@@ -51,5 +51,8 @@ contextBridge.exposeInMainWorld('nodeApi', {
             key: data
         }
         fs.writeFileSync(dataPath + "/config.json", JSON.stringify(new_conf_json, null, 4));
+    },
+    sendEvent(eventName) {
+        ipcRenderer.send(eventName);
     }
 });

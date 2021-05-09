@@ -50,3 +50,12 @@ let userConfig = "";
     }
 
 })();
+$("#minimize").click(function() {
+    window.nodeApi.sendEvent("minimize")
+});
+$("#maximize").click(function() {
+    window.nodeApi.sendEvent("maximize")
+});
+$("#close").click(function() {
+    window.nodeApi.sendEvent("close")
+});
