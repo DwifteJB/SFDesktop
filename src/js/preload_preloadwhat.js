@@ -84,7 +84,7 @@ contextBridge.exposeInMainWorld('nodeApi', {
             if (userdata["avatar"].length < 1) { 
                 LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png"
             } else {
-                LocalUserData.avatar = userData["avatar"]
+                LocalUserData.avatar = userdata["avatar"]
             }
             fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
                 fs.writeFile(path.join(dataPath, 'data.json'), JSON.stringify(dataJS,null,4), function() {
