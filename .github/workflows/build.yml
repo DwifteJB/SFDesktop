@@ -5,14 +5,14 @@ on:
     inputs:
       logLevel:
         description: 'Log level'     
-        required: true
+        required: false
         default: 'warning'
       tags:
         description: 'Test scenario tags' 
-  # push:
-    # branches: [ main ]
-  # pull_request:
-    # branches: [ main ]
+  #push:
+    #branches: [ main ]
+  #pull_request:
+    #branches: [ main ]
 
 jobs:
 
@@ -27,8 +27,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - if: endsWith(github.event.head_commit.message, '--build')
-
 
     - name: "Install Electron Builder"
       run: npm install electron-builder -g
