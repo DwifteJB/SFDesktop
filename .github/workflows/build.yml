@@ -42,3 +42,8 @@ jobs:
       with:
         name: "Starfiles-Dev Win-X64"
         path: "dist/starfiles-desktop Setup 0.0.1.exe"
+    - name: "Upload Windows (portable) Build"
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Starfiles-Dev-portable Win-X64"
+        path: "dist/win-unpacked"
