@@ -61,6 +61,7 @@ contextBridge.exposeInMainWorld('nodeApi', {
         const LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
         return LocalUserData;
     },
+    
     dlFile(url, name) {
         const dlfolder = downloadsFolder();
         const downloader = new Downloader({

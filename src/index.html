@@ -7,30 +7,7 @@
         <link rel="shortcut icon" type="image/png" sizes="64x64" href="starfiles.png"/>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     </head>
-    <body>
-        <div class="titlebar.webkit-draggable titlebar">
-            <div class="titlebar-stoplight">
-                <div id=close class="titlebar-close">
-                    <svg x="0px" y="0px" viewBox="0 0 6.4 6.4">
-                        <polygon fill="#4d0000" points="6.4,0.8 5.6,0 3.2,2.4 0.8,0 0,0.8 2.4,3.2 0,5.6 0.8,6.4 3.2,4 5.6,6.4 6.4,5.6 4,3.2"></polygon>
-                    </svg>
-                </div>
-                <div id=minimize class="titlebar-minimize">
-                    <svg x="0px" y="0px" viewBox="0 0 8 1.1">
-                        <rect fill="#995700" width="8" height="1.1"></rect>
-                    </svg>
-                </div>
-                <div id=maximize class="titlebar-fullscreen">
-                    <svg class="fullscreen-svg" x="0px" y="0px" viewBox="0 0 6 5.9">
-                        <path fill="#006400" d="M5.4,0h-4L6,4.5V0.6C5.7,0.6,5.3,0.3,5.4,0z"></path>
-                        <path fill="#006400" d="M0.6,5.9h4L0,1.4l0,3.9C0.3,5.3,0.6,5.6,0.6,5.9z"></path>
-                    </svg>
-                    <svg class="maximize-svg" x="0px" y="0px" viewBox="0 0 7.9 7.9">
-                        <polygon fill="#006400" points="7.9,4.5 7.9,3.4 4.5,3.4 4.5,0 3.4,0 3.4,3.4 0,3.4 0,4.5 3.4,4.5 3.4,7.9 4.5,7.9 4.5,4.5"></polygon>
-                    </svg>
-                </div>
-            </div>
-        </div>
+    <body style="user-select: none;">
         <!-- <div style=height:30px;width:110%;background-color:rgb(43,43,43) id=topbar></div> -->
         <!--
         <div id="info">
@@ -42,24 +19,27 @@
             <button id="btn2">Register Key</button>
         </div>
         -->
-
-        <div style=text-align:center>
-            <h1>Starfiles</h1>
-            <p>File sharing done simple.</p>
-            <hr>
-            <a href="#">Upload File</a>
+        <img src="starfiles.png" class="starfiles"><span class="starfilestext">STARFILES</span><br><span class="starfilessubtext">File sharing done simple.</span>
+        <div class=sidebar><span style="user-select: none;">&nbsp;</span><div style=text-align:center><a id="Upload" class="btn upload" href="#"><i class="bi bi-cloud-arrow-up-fill"></i> &nbsp;Upload</a></div><br><a href="#" class="btn btn-dark menu_buttons"><span style="font-size: 20px"><i class="bi bi-journals"></i></span> &nbsp; All Files</a><br><a href="#" class="btn btn-dark menu_buttons"><span style="font-size: 20px"><i class="bi bi-file-arrow-down"></i></span> &nbsp; Files Only</a><br><a href="#" class="btn btn-dark menu_buttons"><span style="font-size: 20px"><i class="bi bi-folder2"></i></span> &nbsp; Folders Only</a><hr><br><a href="#" class="btn btn-dark menu_buttons"><span style="font-size: 20px"><i class="bi bi-book"></i></span> &nbsp; History</a><br><a href="#" class="btn btn-dark menu_buttons"><span style="font-size: 20px"><i class="bi bi-trash"></i></span> &nbsp; Trash</a><hr><span class=footer>Created by DwifteJB and CrafterPika</span></div>
+        <!-- <div style=text-align:center> -->
+            <!-- <hr>
+            
             <hr>
             <p>Browse Your Files:</p>
-            <div id="filesList"><!-- <p>Files:</p><br> --></div>
-            <div id="folderList"><!-- <p>Folders:</p><br> --></div>
+            <div id="filesList"><p>Files:</p><br></div>
+            <div id="folderList"><p>Folders:</p><br></div>
             <hr>
             <br>
-            <!-- <a href="./settings.html">Settings</a> -->
-            <br>
+            <a href="./settings.html">Settings</a>
+            <br> -->
             <!-- we dont need copyright nerd!!! -->
-        </div style=text-align:center>
-        <div class="userInfo"><img id="avatar"><span id="username"></span><span id="files"></span><span id="folders"></span></div>
-
+        <!-- </div style=text-align:center> -->
+        
+        <div id=filesdocu class="filesdoc">
+            <br><a style="width:600px" href="javascript:alert(1)"> <span class="file_logo"><i class="bi bi-file-earmark-code"></i></span><span class="filename">&nbsp; Terraria.zip</span><span class="filedate">Feb 07 2018</span><span class="filesize">100MB</span></a>
+        </div>
+        <a href="settings.html" class="userInfo"><img id="avatar"><span id="username"></span><span id="files"></span><br><span id="folders"></span></div>
+        </a>
         <!-- JS -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./js/renderer.js"></script>

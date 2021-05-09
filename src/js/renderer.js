@@ -35,13 +35,15 @@ let userConfig = "";
     $('head').append(`<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->\n<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'strict-dynamic' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf}; connect-src 'self' ${connect_src_conf};">`);
     $('head').append(`<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-${secure_nonce}' ${script_src_conf}; style-src 'self' 'strict-dynamic' 'nonce-${secure_nonce}' ${style_src_conf}; font-src 'self' ${font_src_conf}; img-src 'self' ${img_src_conf}; connect-src 'self' ${connect_src_conf};">`);
     //Other Head Configs
-    $("head").append(`<link rel="stylesheet" href="./css/main.css">`)
-    $('head').append('<link rel="stylesheet" href="./bootstrap/css/bootstrap-grid.min.css">')
-    $('head').append('<link rel="stylesheet" href="./css/titlebar.css">')
-    $('head').append('<script src="./bootstrap/js/bootstrap.min.js"></script>')
-    $('head').append('<script src="./bootstrap/css/bootstrap.min.css"></script>')
+    $('head').append(`<!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    `)
+    $('head').append(`<!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    `)
     $('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
-
+    $("head").append(`<link rel="stylesheet" href="./css/main.css">`)
+    $('head').append('<link rel="stylesheet" href="./css/titlebar.css">')
 
 
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn1").addEventListener('click', openDir);\nfunction openDir() { window.nodeApi.openUserPath("${userConfig.userData}") }</script>`)
@@ -50,14 +52,31 @@ let userConfig = "";
     // $('#info').append(`<br><br><p>You Starfiles key is: <code>${userConfig.key}</code></p>`)
     $("#username").text(userConfig.username)
     $("#avatar").attr("src", userConfig.avatar)
-    $("#files").text("Files: " + userConfig.files)
-    $("#folders").text("Folders: " + userConfig.folders)
-
-    //for(index in json) {console.log(`${[index]} : ${json[index]}`)}
-
-
-})();
-$("#minimize").click(function() {
+    $("#files").text("Files: " + userConfig.filesAmount)
+    $("#folders").text("Folders: " + userConfig.foldersAmount)
+    $("body").prepend(`        <div class="titlebar.webkit-draggable titlebar">
+    <div class="titlebar-stoplight">
+        <div id=close class="titlebar-close">
+            <svg x="0px" y="0px" viewBox="0 0 6.4 6.4">
+                <polygon fill="#4d0000" points="6.4,0.8 5.6,0 3.2,2.4 0.8,0 0,0.8 2.4,3.2 0,5.6 0.8,6.4 3.2,4 5.6,6.4 6.4,5.6 4,3.2"></polygon>
+            </svg>
+        </div>
+        <div id=minimize class="titlebar-minimize">
+            <svg x="0px" y="0px" viewBox="0 0 8 1.1">
+                <rect fill="#995700" width="8" height="1.1"></rect>
+            </svg>
+        </div>
+        <div id=maximize class="titlebar-fullscreen">
+            <svg class="fullscreen-svg" x="0px" y="0px" viewBox="0 0 6 5.9">
+                <path fill="#006400" d="M5.4,0h-4L6,4.5V0.6C5.7,0.6,5.3,0.3,5.4,0z"></path>
+                <path fill="#006400" d="M0.6,5.9h4L0,1.4l0,3.9C0.3,5.3,0.6,5.6,0.6,5.9z"></path>
+            </svg>
+            <svg class="maximize-svg" x="0px" y="0px" viewBox="0 0 7.9 7.9">
+                <polygon fill="#006400" points="7.9,4.5 7.9,3.4 4.5,3.4 4.5,0 3.4,0 3.4,3.4 0,3.4 0,4.5 3.4,4.5 3.4,7.9 4.5,7.9 4.5,4.5"></polygon>
+            </svg>
+        </div>
+    </div>
+</div><script nonce="${secure_nonce}">$("#minimize").click(function() {
     window.nodeApi.sendEvent("minimize")
 });
 $("#maximize").click(function() {
@@ -66,6 +85,9 @@ $("#maximize").click(function() {
 $("#close").click(function() {
     window.nodeApi.sendEvent("close")
 });
-$(".userInfo").click(function() {
-    window.open("./settings.html", "_blank")
-})
+</script>`)
+
+    //for(index in json) {console.log(`${[index]} : ${json[index]}`)}
+
+
+})();

@@ -4,12 +4,12 @@ body,html{
 .titlebar {
     padding: 0 3px;
     background-color: rgb(43,43,43);
-}
-
-.titlebar.webkit-draggable {
     -webkit-app-region: drag;
 }
 
+/* .titlebar.webkit-draggable {
+    -webkit-app-region: drag;
+} */
 .titlebar-stoplight {
     float: left;
     text-align: left;
@@ -39,6 +39,7 @@ body,html{
 .titlebar-close,
 .titlebar-minimize,
 .titlebar-fullscreen {
+    -webkit-app-region: no-drag;
     float: left;
     width: 10px;
     height: 10px;
@@ -47,11 +48,11 @@ body,html{
     line-height: 0;
 }
 
-.titlebar.webkit-draggable .titlebar-close,
+/* .titlebar.webkit-draggable .titlebar-close,
 .titlebar.webkit-draggable .titlebar-minimize,
 .titlebar.webkit-draggable .titlebar-fullscreen {
     -webkit-app-region: no-drag;
-}
+} */
 
 .titlebar-close {
     border: 1px solid #e2463f;

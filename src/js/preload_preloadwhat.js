@@ -33,7 +33,10 @@ const conf_json = {
 }
 
 if (!fs.existsSync(path.join(dataPath, "config.json"))) {
-    fs.writeFileSync(dataPath + "/config.json", JSON.stringify(conf_json, null, 4));
+    fs.writeFileSync(dataPath + "/config.json", JSON.stringify({}, null, 4));
+}
+if (!fs.existsSync(path.join(dataPath, "data.json"))) {
+    fs.writeFileSync(dataPath + "/data.json", JSON.stringify({}, null, 4));
 }
 // Doing A ContextBrige
 
@@ -45,7 +48,7 @@ contextBridge.exposeInMainWorld('nodeApi', {
     },
     checkforUpdate() {
         return new Promise((resolve) => {
-            const version = "0.0.1";
+            const version = "0.0.2";
             const update = (async () => { await fetch(`https://dwiftejb.github.io/starfiles.json`).then(response => response.json()); })();
             if (version !== update.app_ver) {
                 resolve(true)
@@ -56,24 +59,37 @@ contextBridge.exposeInMainWorld('nodeApi', {
     },
     preloadIndex() {
         return new Promise(async (resolve) => {
-            const LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
+            let LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
             if (LocalUserData.length < 1) {
                 //firsttime.html
             }
+            LocalUserData.files = [];
             const userdata = await fetch("https://api.starfiles.co/2.0/users/get_details.php?profile=" + LocalUserData.key).then(response => response.json());
             const folders = await fetch(`https://api.starfiles.co/user/folders?profile=${LocalUserData.key}`).then(response => response.json());
             const files = await fetch(`https://api.starfiles.co/user/files?profile=${LocalUserData.key}`).then(response => response.json());
-            LocalUserData.folders = folders.length;
-            LocalUserData.files = files.length;
+            let dataJS = JSON.parse(fs.readFileSync(dataPath + "/data.json"));
+            await files.forEach(async data => {
+                const file_info = await fetch(`https://api.starfiles.co/file/fileinfo?file=${data.id}`).then(response => response.json());
+                console.log(file_info)
+                dataJS[data.id] = JSON.stringify(file_info, null, 4);
+            })
+            // for (data of files) {
+            //     const file_info = await fetch(`https://api.starfiles.co/file/fileinfo?file=${data.id}`).then(response => response.json());
+            //     console.log(file_info)
+            //     dataJS[data.id] = JSON.stringify(file_info, null, 4);
+            // }
+            LocalUserData.foldersAmount = folders.length;
+            LocalUserData.filesAmount = files.length;
             LocalUserData.username = userdata["username"];
             if (userdata["avatar"].length < 1) { 
                 LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png"
             } else {
                 LocalUserData.avatar = userData["avatar"]
             }
-            await fs.writeFileSync(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData))
+            fs.writeFileSync(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData))
             ipcRenderer.send("load-desktop");
             resolve(true)
+
         })
     }
 });
