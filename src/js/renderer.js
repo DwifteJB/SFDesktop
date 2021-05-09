@@ -38,6 +38,8 @@ let userConfig = "";
     $('head').append('<link rel="stylesheet" href="./css/main.css">')
     $('head').append('<link rel="stylesheet" href="./bootstrap/css/bootstrap-grid.min.css">')
     $('head').append('<link rel="stylesheet" href="./css/titlebar.css">')
+    $('head').append('<script src="./bootstrap/js/bootstrap.min.js"></script>')
+    $('head').append('<script src="./bootstrap/css/bootstrap.min.css"></script>')
     $('head').append(`<script nonce="${secure_nonce}">console.warn('Pasting Code in this console has an 69/10 chance of being scammed!');</script>`)
 
 

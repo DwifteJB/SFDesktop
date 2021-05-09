@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Starfiles</title>
         <link rel="shortcut icon" type="image/png" sizes="64x64" href="starfiles.png"/>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://code.jquery.com/ 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com/ 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com/ 'unsafe-inline'; img-src 'self' 'unsafe-inline'; connect-src 'self' https://dwiftejb.github.io/ http://dwifte.me/ 'unsafe-inline';"> 
     </head>
     <body>
         <div class="titlebar titlebar.webkit-draggable">
@@ -30,37 +31,23 @@
                 </div>
             </div>
         </div>
-        <!-- <div style=height:30px;width:110%;background-color:rgb(43,43,43) id=topbar></div> -->
-        <!--
-        <div id="info">
-            <button id="btn1">Open User Dir</button>
+
+        <br>
+        <a href="index.html" style=text-align:left><- Back</a>
+        <div id="info" style=text-align:center>
+            <hr>
+            <h1>Settings</h1>
+            <hr>
+            <button id="btn1" type="button" class="btn">Open User Dir</button>
             <br>
             <br>
             <input type="text" id="private_key" placeholder="01010101010101">
             <br>
-            <button id="btn2">Register Key</button>
+            <button id="btn2" type="button" class="btn">Register Key</button>
         </div>
-        -->
-
-        <div style=text-align:center>
-            <h1>Starfiles</h1>
-            <p>File sharing done simple.</p>
-            <hr>
-            <a href="#">Upload File</a>
-            <hr>
-            <p>Browse Your Files:</p>
-            <div id="filesList"><!-- <p>Files:</p><br> --></div>
-            <div id="folderList"><!-- <p>Folders:</p><br> --></div>
-            <hr>
-            <br>
-            <a href="./settings.html">Settings</a>
-            <br>
-            <div id="copyright">&copy; CrafterPika 2020-2021</div>
-        </div style=text-align:center>
 
         <!-- JS -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./js/renderer.js"></script>
-        <script src="./js/list_files.js"></script>
     </body>
-</html>
+</html>    
