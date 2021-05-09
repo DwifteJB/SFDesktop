@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require("path");
 const { contextBridge, ipcRenderer } = require('electron')
+const downloadsFolder = require('downloads-folder');
+const Downloader = require('nodejs-file-downloader');
 
 // The User Data
 let dataPath = "";
@@ -72,5 +74,14 @@ contextBridge.exposeInMainWorld('nodeApi', {
         const files = await fetch(`https://api.starfiles.co/user/folders?profile=${LocalUserData.key}`).then(response => response.json())
         console.log(files.length)
         return files.length;
+    },
+    dlFile(url, name) {
+        const dlfolder = downloadsFolder();
+        const downloader = new Downloader({
+            url: url,
+            directory: dlfolder,
+            fileName: name
+        });
+        downloader.download().then(() => require('child_process').exec(`start "" "${dlfolder}"`));
     }
 });

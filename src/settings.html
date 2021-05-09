@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Starfiles</title>
         <link rel="shortcut icon" type="image/png" sizes="64x64" href="starfiles.png"/>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://code.jquery.com/ 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com/ 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com/ 'unsafe-inline'; img-src 'self' 'unsafe-inline'; connect-src 'self' https://dwiftejb.github.io/ http://dwifte.me/ https://api.starfiles.co/ 'unsafe-inline';"> 
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://code.jquery.com/ 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com/ 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com/ 'unsafe-inline'; img-src 'self' 'unsafe-inline'; connect-src 'self' https://dwiftejb.github.io/ http://dwifte.me/ 'unsafe-inline';"> 
     </head>
     <body>
         <div class="titlebar titlebar.webkit-draggable">
@@ -34,19 +34,20 @@
 
         <br>
         <a href="index.html" style=text-align:left><- Back</a>
-        <div style=text-align:center>
+        <div id="info" style=text-align:center>
             <hr>
-            <h1>Starfiles</h1>
-            <p>File sharing done simple.</p>
+            <h1>Settings</h1>
             <hr>
-        </div>
-        <div id="fileinfo" style=text-align:center>
-
+            <button id="btn1" type="button" class="btn">Open User Dir</button>
+            <br>
+            <br>
+            <input type="text" id="private_key" placeholder="01010101010101">
+            <br>
+            <button id="btn2" type="button" class="btn">Register Key</button>
         </div>
 
         <!-- JS -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./js/renderer.js"></script>
-        <script src="./js/file_info.js"></script>
     </body>
 </html>    

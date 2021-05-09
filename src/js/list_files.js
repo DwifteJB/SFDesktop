@@ -11,7 +11,7 @@ async function loadFilesList() {
     files.forEach(data => {
         // console.log(element.name)
         // Show them in index.html
-        $('#filesList').append(`<a href="https://starfiles.co/file/${data.id}">${data.name}</a>`)
+        $('#filesList').append(`<a href="./file.html?file=${data.id}">${data.name}</a>`)
     });
     folders.forEach(data => {
         // Show them in index.html
