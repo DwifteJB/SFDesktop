@@ -45,9 +45,9 @@ let userConfig = "";
     // print starfiles key
     $('#info').append(`<br><br><p>You Starfiles key is: <code>${userConfig.key}</code></p>`)
 
-    if (!userConfig.key || userConfig.key.length == 0) {
-        $("body")
-    }
+    //if (!userConfig.key || userConfig.key.length == 0) {
+      //  $("body") // UNUSED. THIS WOULD BE USED FOR FIRST-TIME, instead I moved it to another file. i would do it but I cba since I'm trying to run lego island
+    //}
 
 })();
 $("#minimize").click(function() {
