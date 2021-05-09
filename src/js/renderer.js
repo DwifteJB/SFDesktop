@@ -54,7 +54,7 @@ let userConfig = "";
     $("#avatar").attr("src", userConfig.avatar)
     $("#files").text("Files: " + userConfig.filesAmount)
     $("#folders").text("Folders: " + userConfig.foldersAmount)
-    $("body").prepend(`        <div class="titlebar.webkit-draggable titlebar">
+    $("body").prepend(`        <div style="position:sticky" class="titlebar.webkit-draggable titlebar">
     <div class="titlebar-stoplight">
         <div id=close class="titlebar-close">
             <svg x="0px" y="0px" viewBox="0 0 6.4 6.4">

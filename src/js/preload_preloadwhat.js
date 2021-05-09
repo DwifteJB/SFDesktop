@@ -67,12 +67,6 @@ contextBridge.exposeInMainWorld('nodeApi', {
             const userdata = await fetch("https://api.starfiles.co/2.0/users/get_details.php?profile=" + LocalUserData.key).then(response => response.json());
             const folders = await fetch(`https://api.starfiles.co/user/folders?profile=${LocalUserData.key}`).then(response => response.json());
             const files = await fetch(`https://api.starfiles.co/user/files?profile=${LocalUserData.key}`).then(response => response.json());
-            let dataJS = JSON.parse(fs.readFileSync(dataPath + "/data.json"));
-            await files.forEach(async data => {
-                const file_info = await fetch(`https://api.starfiles.co/file/fileinfo?file=${data.id}`).then(response => response.json());
-                console.log(file_info)
-                dataJS[data.id] = JSON.stringify(file_info, null, 4);
-            })
             // for (data of files) {
             //     const file_info = await fetch(`https://api.starfiles.co/file/fileinfo?file=${data.id}`).then(response => response.json());
             //     console.log(file_info)
@@ -87,11 +81,8 @@ contextBridge.exposeInMainWorld('nodeApi', {
                 LocalUserData.avatar = userdata["avatar"]
             }
             fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
-                fs.writeFile(path.join(dataPath, 'data.json'), JSON.stringify(dataJS,null,4), function() {
-         
-                    ipcRenderer.send("load-desktop");
-                    resolve(true)
-                })
+                ipcRenderer.send("load-desktop");
+                resolve(true)
             })
 
 
