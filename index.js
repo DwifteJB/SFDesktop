@@ -44,7 +44,7 @@ ipcMain.on('load-desktop', (event,arg) => {
     newWin.loadFile(path.join(__dirname, 'src/index.html'))
   }
   ipcMain.on("maximize", () => {
-    newWin.isMinimized() ? newWin.restore() : newWin.maximize();
+    window.isMaximized() ? window.unmaximize() : window.maximize();
   })
   ipcMain.on("close", () => {
     newWin.close();
