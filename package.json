@@ -11,6 +11,8 @@
   "author": "CrafterPika",
   "license": "ISC",
   "dependencies": {
+    "downloads-folder": "^3.0.1",
+    "nodejs-file-downloader": "^4.5.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
