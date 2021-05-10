@@ -59,33 +59,43 @@ contextBridge.exposeInMainWorld('nodeApi', {
     },
     preloadIndex() {
         return new Promise(async (resolve) => {
-            let LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
-            if (LocalUserData.length < 1) {
-                //firsttime.html
+            try {
+                let LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
+                if (LocalUserData.length < 1) {
+                    //firsttime.html
+                }
+                LocalUserData.files = [];
+                const userdata = await fetch("https://api.starfiles.co/2.0/users/get_details.php?profile=" + LocalUserData.key).then(response => response.json());
+                const folders = await fetch(`https://api.starfiles.co/user/folders?profile=${LocalUserData.key}`).then(response => response.json());
+                const files = await fetch(`https://api.starfiles.co/user/files?profile=${LocalUserData.key}`).then(response => response.json());
+                // for (data of files) {
+                //     const file_info = await fetch(`https://api.starfiles.co/file/fileinfo?file=${data.id}`).then(response => response.json());
+                //     console.log(file_info)
+                //     dataJS[data.id] = JSON.stringify(file_info, null, 4);
+                // }
+                LocalUserData.foldersAmount = folders.length;
+                LocalUserData.filesAmount = files.length;
+                LocalUserData.username = userdata["username"];
+                if (userdata["avatar"].length < 1) { 
+                    LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png"
+                } else {
+                    LocalUserData.avatar = userdata["avatar"]
+                }
+                fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
+                    ipcRenderer.send("load-desktop");
+                    resolve(true)
+                })
+            } catch (err) {
+                let LocalUserData = "";
+                LocalUserData.foldersAmount = "0";
+                LocalUserData.filesAmount = "0";
+                LocalUserData.username = "Please Login";
+                LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png";
+                fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
+                    ipcRenderer.send("load-desktop");
+                    resolve(true)
+                })
             }
-            LocalUserData.files = [];
-            const userdata = await fetch("https://api.starfiles.co/2.0/users/get_details.php?profile=" + LocalUserData.key).then(response => response.json());
-            const folders = await fetch(`https://api.starfiles.co/user/folders?profile=${LocalUserData.key}`).then(response => response.json());
-            const files = await fetch(`https://api.starfiles.co/user/files?profile=${LocalUserData.key}`).then(response => response.json());
-            // for (data of files) {
-            //     const file_info = await fetch(`https://api.starfiles.co/file/fileinfo?file=${data.id}`).then(response => response.json());
-            //     console.log(file_info)
-            //     dataJS[data.id] = JSON.stringify(file_info, null, 4);
-            // }
-            LocalUserData.foldersAmount = folders.length;
-            LocalUserData.filesAmount = files.length;
-            LocalUserData.username = userdata["username"];
-            if (userdata["avatar"].length < 1) { 
-                LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png"
-            } else {
-                LocalUserData.avatar = userdata["avatar"]
-            }
-            fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
-                ipcRenderer.send("load-desktop");
-                resolve(true)
-            })
-
-  
         })
     }
 });
