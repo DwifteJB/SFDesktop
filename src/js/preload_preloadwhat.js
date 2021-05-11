@@ -86,10 +86,10 @@ contextBridge.exposeInMainWorld('nodeApi', {
                     resolve(true)
                 })
             } catch (err) {
-                let LocalUserData = "";
+                let LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
                 LocalUserData.foldersAmount = "0";
                 LocalUserData.filesAmount = "0";
-                LocalUserData.username = "Please Login";
+                LocalUserData.username = "Login";
                 LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png";
                 fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
                     ipcRenderer.send("load-desktop");
