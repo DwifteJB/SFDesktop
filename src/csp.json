@@ -2,7 +2,8 @@
     "script_src": [
         "https://code.jquery.com/",
         "https://crafterpika.ml/",
-        "https://cdn.jsdelivr.net"
+        "https://cdn.jsdelivr.net",
+        "file://"
     ],
     "style_src": [
         "https://*.github.io/",

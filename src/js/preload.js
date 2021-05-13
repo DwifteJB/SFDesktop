@@ -6,6 +6,7 @@ const Downloader = require('nodejs-file-downloader');
 
 // The User Data
 let dataPath = "";
+let dataPath2 = "";
 
 if (process.platform === "win32") {
     dataPath = process.env.APPDATA;
@@ -14,6 +15,7 @@ if (process.platform === "win32") {
 } else {
     dataPath = process.env.XDG_CONFIG_HOME ? process.env.XDG_CONFIG_HOME : path.join(process.env.HOME, ".config");
 }
+dataPath2 = path.join(dataPath, "SFDesktop") + "/";
 dataPath = path.join(dataPath, "SFDesktop") + "/";
 // Does it exist???
 if (!fs.existsSync(dataPath)) {
@@ -25,6 +27,7 @@ if (!fs.existsSync(path.join(dataPath, "plugins"))) {
 if (!fs.existsSync(path.join(dataPath, "themes"))) {
     fs.mkdirSync(path.join(dataPath, "themes"));
 }
+
 
 const regex = /\\/g;
 dataPath = dataPath.replace(regex, '/');
@@ -75,7 +78,9 @@ contextBridge.exposeInMainWorld('nodeApi', {
         downloader.download().then(() => require('child_process').exec(`start "" "${dlfolder}"`));
     },
     getPluginFiles() {
-        const pluginfiles = fs.readFileSync(`${dataPath}/plugins/`).filter(file => file.endsWith('.plugin.js'));
-        return pluginfiles;
+        let pluginFiles = "";
+        const pluginPath = path.join(dataPath2, 'plugins')
+        pluginFiles = fs.readdirSync(pluginPath).filter(file => file.endsWith('.plugin.js'));
+        return pluginFiles;
     }
 });
