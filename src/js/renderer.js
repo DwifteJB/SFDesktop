@@ -8,6 +8,7 @@ let userConfig = "";
 (async (userConfig, secure_nonce) => {
     // get csp config
     userConfig = await fetch(window.nodeApi.gibConfigPath()).then(response => response.json())
+    userData = await fetch(window.nodeApi.gibDataPath()).then(response => response.json())
     const csp_conf = await fetch("./csp.json").then(response => response.json())
         
     // script-src
@@ -50,10 +51,10 @@ let userConfig = "";
     $('head').append(`<script nonce="${secure_nonce}">document.getElementById("btn2").addEventListener('click', regKey);\nfunction regKey() {\nvar input =  document.getElementById("private_key").value;\nconsole.log(input);\nwindow.nodeApi.addKey(input);\n};</script>`)
     // print starfiles key
     // $('#info').append(`<br><br><p>You Starfiles key is: <code>${userConfig.key}</code></p>`)
-    $("#username").text(userConfig.username)
-    $("#avatar").attr("src", userConfig.avatar)
-    $("#files").text("Files: " + userConfig.filesAmount)
-    $("#folders").text("Folders: " + userConfig.foldersAmount)
+    $("#username").text(userData.username)
+    $("#avatar").attr("src", userData.avatar)
+    $("#files").text("Files: " + userData.filesAmount)
+    $("#folders").text("Folders: " + userData.foldersAmount)
     $("body").prepend(`        <div style="position:sticky" class="titlebar.webkit-draggable titlebar">
     <div class="titlebar-stoplight">
         <div id=close class="titlebar-close">

@@ -44,6 +44,10 @@ contextBridge.exposeInMainWorld('nodeApi', {
         const configPath = path.join(dataPath, 'config.json')
         return `file://${configPath}`;
     },
+    gibDataPath: () => {
+        const configPath = path.join(dataPath, 'data.json')
+        return `file://${configPath}`;
+    },
     openUserPath(data) {
         require('child_process').exec(`start "" "${data}"`);
     },
@@ -61,7 +65,6 @@ contextBridge.exposeInMainWorld('nodeApi', {
         const LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
         return LocalUserData;
     },
-    
     dlFile(url, name) {
         const dlfolder = downloadsFolder();
         const downloader = new Downloader({
@@ -70,5 +73,9 @@ contextBridge.exposeInMainWorld('nodeApi', {
             fileName: name
         });
         downloader.download().then(() => require('child_process').exec(`start "" "${dlfolder}"`));
+    },
+    getPluginFiles() {
+        const pluginfiles = fs.readFileSync(`${dataPath}/plugins/`).filter(file => file.endsWith('.plugin.js'));
+        return pluginfiles;
     }
 });

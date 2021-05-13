@@ -33,13 +33,14 @@ const conf_json = {
 }
 
 if (!fs.existsSync(path.join(dataPath, "config.json"))) {
-    fs.writeFileSync(dataPath + "/config.json", JSON.stringify({}, null, 4));
+    fs.writeFileSync(dataPath + "/config.json", JSON.stringify(conf_json, null, 4));
 }
+
 if (!fs.existsSync(path.join(dataPath, "data.json"))) {
     fs.writeFileSync(dataPath + "/data.json", JSON.stringify({}, null, 4));
 }
-// Doing A ContextBrige
 
+// Doing A ContextBrige
 contextBridge.exposeInMainWorld('nodeApi', {
     getJoke() {
         console.log(__dirname)
@@ -60,7 +61,7 @@ contextBridge.exposeInMainWorld('nodeApi', {
     preloadIndex() {
         return new Promise(async (resolve) => {
             try {
-                let LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
+                let LocalUserData = await fetch("file://" + path.join(dataPath, 'data.json')).then(response => response.json())
                 if (LocalUserData.length < 1) {
                     //firsttime.html
                 }
@@ -81,17 +82,17 @@ contextBridge.exposeInMainWorld('nodeApi', {
                 } else {
                     LocalUserData.avatar = userdata["avatar"]
                 }
-                fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
+                fs.writeFile(path.join(dataPath, 'data.json'), JSON.stringify(LocalUserData, null, 4), function() {
                     ipcRenderer.send("load-desktop");
                     resolve(true)
                 })
             } catch (err) {
-                let LocalUserData = await fetch("file://" + path.join(dataPath, 'config.json')).then(response => response.json())
+                let LocalUserData = await fetch("file://" + path.join(dataPath, 'data.json')).then(response => response.json())
                 LocalUserData.foldersAmount = "0";
                 LocalUserData.filesAmount = "0";
                 LocalUserData.username = "Login";
                 LocalUserData.avatar = "https://cdn.starfiles.co/images/logo.png";
-                fs.writeFile(path.join(dataPath, 'config.json'), JSON.stringify(LocalUserData, null, 4), function() {
+                fs.writeFile(path.join(dataPath, 'data.json'), JSON.stringify(LocalUserData, null, 4), function() {
                     ipcRenderer.send("load-desktop");
                     resolve(true)
                 })
